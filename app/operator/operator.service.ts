@@ -1,4 +1,6 @@
 import {Injectable} from '@angular/core';
+import {Http} from "@angular/http";
+import {Observable} from "rxjs";
 
 export const OPERATORS: Operator[] = [
     {id: 11, name: 'Mr. Nice'},
@@ -15,6 +17,10 @@ export const OPERATORS: Operator[] = [
 
 @Injectable()
 export class OperatorService {
+    constructor(private http: Http) {
+
+    }
+
     getOperators(): Promise<Operator[]> {
         return new Promise((resolve, reject)=> {
             resolve(OPERATORS)
@@ -24,6 +30,12 @@ export class OperatorService {
     getOperator(id: number): Promise<Operator> {
         return new Promise((resolve, reject)=> {
             resolve(OPERATORS.find(op=>op.id === id));
+        });
+    }
+
+    getOperatorByHttp(id: number): Observable<Operator> {
+        return this.http.get('https://api.github.com/users').map((e)=> {
+            return e.json();
         });
     }
 }
