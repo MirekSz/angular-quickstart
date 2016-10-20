@@ -18,10 +18,11 @@ import {CommonModule} from "@angular/common";
             },
             {
                 path: ':id',
-                component: OperatorDetails
+                component: OperatorDetails,
+                children: []
             }
 
-        ], {useHash: true})],
+        ])],
     providers: [OperatorService],
     declarations: [OperatorList, OperatorDetails],
     exports: [OperatorList]
