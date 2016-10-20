@@ -1,5 +1,4 @@
 import {NgModule}      from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
 
 import {OperatorList}  from './operator-list.component';
 import {OperatorService}  from './operator.service';
@@ -7,18 +6,21 @@ import {HttpModule} from "@angular/http";
 import {OperatorDetails} from "./operator-details.component";
 import {FormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
+import {CommonModule} from "@angular/common";
 
 @NgModule({
-    imports: [BrowserModule, HttpModule, FormsModule,
-        RouterModule.forRoot([
+    imports: [CommonModule, HttpModule, FormsModule,
+        RouterModule.forChild([
             {
-                path: 'operators',
-                component: OperatorList
+                path: '',
+                component: OperatorList,
+                children: []
             },
             {
-                path: 'operators/:id',
+                path: ':id',
                 component: OperatorDetails
             }
+
         ], {useHash: true})],
     providers: [OperatorService],
     declarations: [OperatorList, OperatorDetails],

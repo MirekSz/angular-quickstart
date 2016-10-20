@@ -14,7 +14,7 @@ export class Empty {
 
 
 @NgModule({
-    imports: [BrowserModule, OperatorModule, FormsModule, RouterModule.forRoot([
+    imports: [BrowserModule, FormsModule, RouterModule.forRoot([
         {
             path: '',
             redirectTo: '/init',
@@ -22,7 +22,11 @@ export class Empty {
         },
         {
             path: 'init',
-            component: Empty
+            component: Empty,
+        },
+        {
+            path: 'operators',
+            loadChildren: 'app/operator/operator.module#OperatorModule',
         },
 
     ], {useHash: true})],

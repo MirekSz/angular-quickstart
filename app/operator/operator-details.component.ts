@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnChanges, SimpleChanges} from '@angular/core';
 import {OperatorService, Operator} from "./operator.service";
 import {Input} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
@@ -11,7 +11,11 @@ import {ActivatedRoute} from "@angular/router";
             <input (click)="changeEditMode()"  type="checkbox"/>
         </h3>`
 })
-export class OperatorDetails implements OnInit {
+export class OperatorDetails implements OnInit,OnChanges {
+    ngOnChanges(changes: SimpleChanges): void {
+        console.log('busS')
+    }
+
     @Input()
     operator: Operator;
     editMode: boolean = false;
@@ -33,8 +37,8 @@ export class OperatorDetails implements OnInit {
     ngOnInit(): void {
         console.log('this.router.params: ');
         this.router.params.forEach((param)=> {
-            var param = param['id'];
-            this.operatorService.getOperator(Number.parseInt(param)).then((op)=>this.operator = op);
+            var id = param['id'];
+            this.operatorService.getOperator(Number.parseInt(id)).then((op)=>this.operator = op);
         });
         console.log('Details: ');
     }
